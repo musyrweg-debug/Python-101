@@ -1,0 +1,118 @@
+#   ------ DOSAGE CALCULATOR-----------  #
+#  Store prescribed dose data
+# total_daily_dose_mg = 1500
+# dose_strength_per_tablet_mg = 500
+
+# # Calculate number of tablets per day
+# number_of_tablets_per_day = total_daily_dose_mg // dose_strength_per_tablet_mg
+
+# # Calculate the total number of tablets for the whole course
+# total_tablets = number_of_tablets_per_day * 10
+
+# # Determine whether the max safe dose is exceeded
+# max_safe_daily_dose_mg = 3000
+# overdose = max_safe_daily_dose_mg < total_daily_dose_mg
+
+# # Print results clearly
+# print(float(number_of_tablets_per_day))
+# print(total_tablets)
+# print(overdose) 
+
+#--------STRING QUIZ-----
+# drug_code = "PEN 250"
+# print(drug_code[0])
+
+# #------01
+# instructions="  Take with food  "
+# new_instructions = instructions.strip()
+# print(f"'{instructions}'")
+# print(f"'{new_instructions}'")
+
+# #------02
+# drug_codes = "AMX 250"
+# print(drug_codes[0:3])
+
+# #------04
+# meds = ("Metformin", "Lisinopril", "Aspirin")
+# list_one = " | ".join(meds)
+# print(list_one)
+
+#-------05
+# file_name = "patient_data.csv"
+# print(file_name.endswith(".csv"))
+# print(file_name.startswith("name"))
+# print(f"Dose: 500 mg")
+
+# #------07
+# drugname = "Amoxicillin"
+# look = drugname.find("cillin")
+# print(look)
+
+# #-------STRING CHALLENGE
+# Patient_name    = "Sarah Jackson"
+# drug            = "Amoxicilln 500 mg capsules"
+# dose_mg         = 500
+# route           = "by mouth"
+# frequency       = "three times daily"
+# duration_days   = "10 days"
+# precriber       = "Dr. Emily Chen"
+# rx_number       = "RX-20240115-001"
+# label= f"""
+
+# PATIENT PRESCRIPTION
+# -------------------------------
+# Rx NO. {rx_number}
+# --------------------------------
+# Patient name:  {Patient_name}
+# drug:          {drug}           
+# dose_mg:       {dose_mg}  
+# route:         {route}
+# frequency:     {frequency}
+# duration_days: {duration_days}
+# precriber:     {precriber}
+# --------------------------------
+# """
+# print(label)
+
+#------------LIST AND TUPLES---------
+#------Step 01
+# 
+
+#--------CHALLENGES------------------
+drug_db = {
+    "Amoxicillin":{"class":"Antibiotic", "max_dose_mg": 250, "unit":"mg"},
+    "Aspirin":{"class":"Nsaid", "max_dose_mg": 250, "unit":"mg"},
+    "Omeprazole":{"class":"ppi", "max_dose_mg": 20, "unit":"mg"},
+    "Penicillin":{"class":"Antibiotic", "max_dose_mg": 75, "unit":"mg"}
+}
+
+# drug_db["Azithromycin"]=["Antiobiotics"],["500"],["mg"]
+# drug_db["paracetmol"]=["analgesics"],["400"],["mg"]
+drug_db["Amoxicillin"]["max_dose_mg"]=[400]
+print(drug_db)
+
+# def max_dose(drug):
+#     for drug in drug_db:
+#         print(drug_db["drug"]["max_dose_mg"])
+#     else:
+#         return "value not found"
+
+# print(max_dose("Aspirin"))
+# lookup_drug(name)
+def lookup_drug(name):
+    if name in  drug_db:
+        mximum_ds = drug_db[name]["max_dose_mg"]
+        return mximum_ds
+    else:
+        return"Drug not found"
+
+print(lookup_drug("Aspirin"))
+    
+# def lookup_drug(name):
+#     if name in drug_db:
+#         return drug_db[name]
+#     else:
+#         return"Sorry the drug is missing"
+
+# print(lookup_drug("Amoxicillin"))
+# print(lookup_drug("Aspirin"))  

@@ -1,0 +1,97 @@
+#-------ACCEPTANCE CRITERIA---------
+
+# account_list = []
+
+name = input("Enter your name:")
+phone_number = input("Enter your phone number (start with +255):")
+pin = (int(input("Enter your PIN:")))
+balance = 0
+
+
+transactions = []
+
+# account = {
+#     "name": name,
+#     "phone_number": phone_number,
+#     "pin": pin
+# }
+
+# account_list.append(account)
+
+print("Account is stored succesfully")
+
+
+
+#------LOG IN TO ACOUNT------
+print("LOG IN TO YOUR ACCOUNT")
+def check_phone_number():
+    user_phone_no = input("Enter your Phone number:")
+   
+    if user_phone_no == phone_number:
+        return True
+    else:
+        print("The phone number is invalid")
+        return False
+
+
+#------PIN-----
+def check_pin_no():
+    user_pin_no = int(input("Enter PIN number:"))
+   
+    if user_pin_no == pin:
+        return True
+    else:
+        print("The PIN  is invalid")
+        return False
+        
+    
+valid_phone = check_phone_number()
+valid_pin = check_pin_no()
+
+
+if valid_phone and valid_pin:
+    print("Login succesiful")
+
+#--------BALANCE AND DEPOSIT--------
+account_no = input("Enter account number:")
+deposit_amount = input("Enter deposit amount:")
+
+balance = float(deposit_amount) + balance
+depos_trans = f"Deposit -- {deposit_amount}"
+transactions.append(depos_trans)
+
+print(f"Your account balance is: {balance} Tsh")
+
+#-------WITHDRAW CASH---------
+withdraw = float(input("Enter amount for withdrawal:"))
+
+if withdraw <= balance:
+    balance = balance - withdraw
+    with_trans = f"Withdraw -- {withdraw}"
+    transactions.append(with_trans)
+
+else:
+    print("You lack sufficient funds")
+
+#-------SEND MONEY------
+receiver_number = input("Enter receiver phone number:")
+receiver_amount = float(input("Enter amount:"))
+
+if receiver_amount<= balance:
+    balance = balance - receiver_amount
+    trans_trans = f"Transfer {receiver_amount} to {receiver_number}"
+    transactions.append(trans_trans)
+else:
+    print("You dont have sufficient funds")
+
+#---------CHECK BALANCE----------
+print(f"your account balance is:{balance} Tshs")
+
+#--------CHANGE PIN---------
+old_pin = int(input("Enter old pin number:"))
+if old_pin == pin:
+    new_pin = int(input("Enter new pin number:"))
+    pin = new_pin
+    print("Pin changed succesfully!")
+else:
+    print("Enter valid pin number")

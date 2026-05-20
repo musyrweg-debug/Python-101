@@ -1,0 +1,38 @@
+#     QUIZ 01
+Metformin_mg = 500
+night_dose_mg = 1000
+frequency = 2
+total_daily_dose = (Metformin_mg * frequency) + night_dose_mg
+print(total_daily_dose)
+
+# QUIZ 02
+blister = 28
+taken_tablets = 11
+remaining_tablets = blister - taken_tablets
+print(remaining_tablets)
+
+# QUIZ 03
+medicine = 30
+week_day = 7
+number_of_complete_weeks = medicine // week_day
+remaining_days = medicine % week_day
+print(number_of_complete_weeks)
+print(remaining_days)
+
+# QUIZ 04
+maximum_safe_dose = 4000
+daily_dose = 4500
+overdose = daily_dose > maximum_safe_dose
+print(overdose)
+
+# QUIZ 06
+penicillin_allergy = False
+sulfonamide_allergy = True
+do_not_dispense = penicillin_allergy or sulfonamide_allergy
+print(do_not_dispense)
+
+# QUIZ 07
+loading_dose = 800
+maintanance_dose = 400
+results = loading_dose + maintanance_dose/2
+print(results)
