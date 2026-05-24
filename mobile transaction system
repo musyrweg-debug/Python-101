@@ -1,97 +1,137 @@
 #-------ACCEPTANCE CRITERIA---------
-
+user_account = []
 # account_list = []
 
-name = input("Enter your name:")
-phone_number = input("Enter your phone number (start with +255):")
-pin = (int(input("Enter your PIN:")))
-balance = 0
-
-
-transactions = []
-
-# account = {
-#     "name": name,
-#     "phone_number": phone_number,
-#     "pin": pin
-# }
-
-# account_list.append(account)
-
-print("Account is stored succesfully")
+def register_account():
+    name = input("Enter your name:")
+    phone_number = input("Enter your phone number (start with +255):")
+    pin = (int(input("Enter a 5-digit PIN:")))
+    
+    account = {
+        "name": name,
+        "phone_number": phone_number,
+        "pin": pin,
+        "balance": 0,
+        "transactions": []
+    }
+    user_account.append(account)
+    print("Account registered successfully")
 
 
 
 #------LOG IN TO ACOUNT------
-print("LOG IN TO YOUR ACCOUNT")
-def check_phone_number():
-    user_phone_no = input("Enter your Phone number:")
-   
-    if user_phone_no == phone_number:
-        return True
-    else:
-        print("The phone number is invalid")
-        return False
-
-
-#------PIN-----
-def check_pin_no():
-    user_pin_no = int(input("Enter PIN number:"))
-   
-    if user_pin_no == pin:
-        return True
-    else:
-        print("The PIN  is invalid")
-        return False
-        
+def login():
+    phone_number = input("Enter your phone number:")
+    pin = int(input("Enter your PIN:"))
     
-valid_phone = check_phone_number()
-valid_pin = check_pin_no()
-
-
-if valid_phone and valid_pin:
-    print("Login succesiful")
+    for account in user_account:
+        if account["phone_number"] == phone_number and account["pin"] == pin:
+            print("Login successful")
+            return account
+        else:
+            print("Invalid phone number or PIN")
+            return None
+        
 
 #--------BALANCE AND DEPOSIT--------
-account_no = input("Enter account number:")
-deposit_amount = input("Enter deposit amount:")
-
-balance = float(deposit_amount) + balance
-depos_trans = f"Deposit -- {deposit_amount}"
-transactions.append(depos_trans)
-
-print(f"Your account balance is: {balance} Tsh")
+def deposit(account):
+    deposit_amount = float(input("Enter deposit amount:"))
+    account["balance"] += deposit_amount
+    account["transactions"].append(f"Deposit -- {deposit_amount}")
+    print(f"Your account balance is: {account['balance']} Tsh")
 
 #-------WITHDRAW CASH---------
-withdraw = float(input("Enter amount for withdrawal:"))
+def withdraw(account):
+    withdrawal = float(input("Enter amount for withdrawal:"))
+    if withdrawal <= account["balance"]:
+        account["balance"] -= withdrawal
+        account["transactions"].append(f"Withdraw -- {withdrawal}")
+        print(f"Your account balance is: {account['balance']} Tsh")
+    else:
+        print("You lack sufficient funds")
 
-if withdraw <= balance:
-    balance = balance - withdraw
-    with_trans = f"Withdraw -- {withdraw}"
-    transactions.append(with_trans)
-
-else:
-    print("You lack sufficient funds")
 
 #-------SEND MONEY------
-receiver_number = input("Enter receiver phone number:")
-receiver_amount = float(input("Enter amount:"))
+def send_money(account):
+    receiver_number = input("Enter receiver phone number:")
+    receiver_amount = float(input("Enter amount:"))
+    if receiver_amount <= account["balance"]:
+        account["balance"] -= receiver_amount
+        account["transactions"].append(f"Transfer {receiver_amount} to {receiver_number}")
+        print(f"Your account balance is: {account['balance']} Tsh")
+    else:
+        print("You dont have sufficient funds")
 
-if receiver_amount<= balance:
-    balance = balance - receiver_amount
-    trans_trans = f"Transfer {receiver_amount} to {receiver_number}"
-    transactions.append(trans_trans)
-else:
-    print("You dont have sufficient funds")
 
-#---------CHECK BALANCE----------
-print(f"your account balance is:{balance} Tshs")
+#---------CHECK BALANCE----------\
+def check_balance(account):
+    print(f"Your account balance is: {account['balance']} Tshs")
+
+#-------VIEW TRANSACTIONS---------
+def view_transactions(account):
+    print("Transaction history:")
+    for transaction in account["transactions"]:
+        print(transaction)
 
 #--------CHANGE PIN---------
-old_pin = int(input("Enter old pin number:"))
-if old_pin == pin:
-    new_pin = int(input("Enter new pin number:"))
-    pin = new_pin
-    print("Pin changed succesfully!")
-else:
-    print("Enter valid pin number")
+def change_pin(account):
+    old_pin = int(input("Enter old pin number:"))
+    if old_pin == account["pin"]:
+        new_pin = int(input("Enter new pin number:"))
+        account["pin"] = new_pin
+        print("Pin changed succesfully!")
+
+#-------LOG OUT---------
+def logout():
+    print("You have been logged out successfully")
+
+def money():
+    while True:
+        print("Welcome to the Mobile Transaction System")
+        print("1. Register")
+        print("2. Login")
+        print("3. Exit")
+        
+        choice = input("Enter your choice:")
+        
+        if choice == "1":
+            register_account()
+        elif choice == "2":
+            account = login()
+            if account:
+                while True:
+                    print("1. Deposit")
+                    print("2. Withdraw")
+                    print("3. Send Money")
+                    print("4. Check Balance")
+                    print("5. View Transactions")
+                    print("6. Change PIN")
+                    print("7. Logout")
+                    
+                    user_choice = input("Enter your choice:")
+                    
+                    if user_choice == "1":
+                        deposit(account)
+                    elif user_choice == "2":
+                        withdraw(account)
+                    elif user_choice == "3":
+                        send_money(account)
+                    elif user_choice == "4":
+                        check_balance(account)
+                    elif user_choice == "5":
+                        view_transactions(account)
+                    elif user_choice == "6":
+                        change_pin(account)
+                    elif user_choice == "7":
+                        logout()
+                        break
+                    else:
+                        print("Invalid choice, please try again.")
+        elif choice == "3":
+            print("Thank you for using the Mobile Transaction System. Goodbye!")
+            break
+        else:
+            print("Invalid choice, please try again.")
+
+if __name__ == "__main__":
+    money()

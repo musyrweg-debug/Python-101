@@ -655,3 +655,6 @@ teachers.update(students)
 print(students["student 1"]["grade"])
 students["student 2"]["grade"]= 8
 print(teachers)
+
+best_student = max(students, key=lambda x: x["average"])
+    print(f"The best student is {best_student['name']} with an average score of {best_student['average']}")
