@@ -1,18 +1,17 @@
 #--------INVENTORY MANAGEMENT SYSTEM--------#
 inventory = []
 def add_item():
-    while True:
         item_name = input("enter item name:")
         item_quantity = int(input("enter item quantity:"))  
         item_price = float(input("enter item price:"))
-        break
-    item_data = {
+    
+        item_data = {
             "name": item_name,
             "quantity": item_quantity,
             "price": item_price
         }
-    inventory.append(item_data)
-    print("Inventory updated successfully!")
+        inventory.append(item_data)
+        print("Inventory updated successfully!")
 
     
 def view_inventory():
@@ -86,19 +85,21 @@ def product_categories():
     print("Product category added successfully!")
 
 def system_menu():
-    print("""
-          CHOOSE AN OPTION:
-    1. Add item
-    2. View inventory
-    3. Search item
-    4. Low stock alert
-    5. Stock value calculation
-    6. Stock balance update
-    7. Remove product
-    8. Product categories
-    """)
-    choice = input("Enter your choice:")
     while True:
+        print("""
+          CHOOSE AN OPTION:
+        1. Add item
+        2. View inventory
+        3. Search item
+        4. Low stock alert
+        5. Stock value calculation
+        6. Stock balance update
+        7. Remove product
+        8. Product categories
+        0. Exit          
+        """)
+        choice = input("Enter your choice:")
+    
         if choice == "1":
             add_item()
         elif choice == "2":
@@ -115,10 +116,13 @@ def system_menu():
             remove_product()
         elif choice == "8":
             product_categories()
+        elif choice == "0":
+            print("Exiting the system. Goodbye!")
             break
         else:
-            print("Invalid choice, try again")
-            
+                print("Invalid choice, try again")
+        
+                
 if __name__ == "__main__":
     system_menu()
          
